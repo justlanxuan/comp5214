@@ -12,18 +12,18 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 mnist = tf.keras.datasets.mnist
+from tensorflow.keras.utils import to_categorical
 def load_mnist():
     (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
     # Normalize and add channel
     train_images = np.expand_dims(train_images, axis=-1) / 255.0
     test_images = np.expand_dims(test_images, axis=-1) / 255.0
-    # Convert labels to int64
-    train_labels = np.int64(train_labels)
-    test_labels = np.int64(test_labels)
+    train_labels = to_categorical(train_labels)
+    test_labels = to_categorical(test_labels)
 
     return (train_images, train_labels), (test_images, test_labels)
 
-# Explore the data
+'''# Explore the data
 (train_images, train_labels),(test_images,test_labels) = load_mnist()
 print("Train image shape: ",train_images.shape)
 print("Test image shape: ",test_images.shape)
@@ -37,3 +37,4 @@ for i in range(36):
     image_ind = random_inds[i]
     plt.imshow(np.squeeze(train_images[image_ind]), cmap=plt.cm.binary)
     plt.xlabel(train_labels[image_ind])
+'''
